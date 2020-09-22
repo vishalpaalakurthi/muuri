@@ -1,24 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MuuriGrid from './customgrid/MuuriGrid';
+
 
 function App() {
+  var items = [{"key":"key1", "value":"value1"}, {"key":"key2", "value":"value2"}
+,{"key":"key3", "value":"ble it and... that's it 🤯! The Items are the components that can be dragged, the MuuriComponent represents the container in which the Items can be dropped."}
+, {"key":"key4", "value":"value2"}
+,{"key":"key5", "value":"value1"}, {"key":"key6", "value":"value2"},
+{"key":"key7", "value":"value1"}, {"key":"key2", "value":"value2"}
+,{"key":"key1", "value":"value1"}, {"key":"key2", "value":"value2"}
+,{"key":"key1", "value":"value1"}, {"key":"key2", "value":"value2"}
+,{"key":"key1", "value":"value1"}, {"key":"key2", "value":"value2"}];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <MuuriGrid items={items} />
     </div>
   );
 }

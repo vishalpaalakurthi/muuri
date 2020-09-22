@@ -1004,7 +1004,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.5.1":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.5.1", "@babel/runtime@^7.9.2":
   version "7.11.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
   integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
@@ -6891,6 +6891,19 @@ mute-stream@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
+
+muuri-react@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/muuri-react/-/muuri-react-3.1.6.tgz#e42222a48cb60b87489fa272ad532994e9111aac"
+  integrity sha512-r3EoHD2LL0m6tB6ymgDXIvbiou9r7cJSCFKLW8WcprzKWuWQxtKLRYfW+YOvkqzW73MfHHVf9/jNei3txFaIRw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    prop-types "^15.7.2"
+
+muuri@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/muuri/-/muuri-0.9.3.tgz#34c2bb785cca2dfaba39f5826b271edfb22477a8"
+  integrity sha512-GZGTaHxYALCCH04mmxkZ6nVr5nq2Ur8dQfbxFtyejP4U8kjae/6ZE2A9bugRBWMUIuyGRQ9btROj0gV6jQqFpQ==
 
 nan@^2.12.1:
   version "2.14.0"
