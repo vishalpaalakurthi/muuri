@@ -5,20 +5,48 @@ class MuuriGrid extends React.Component {
 
     constructor() {
         super();
+        this.state = {
+            items: [{ "key": "key1", "value": "value1" }
+                , { "key": "key2", "value": "value2" }
+                , { "key": "key3", "value": "ble it and... that's it 🤯! The Items are the components that can be dragged, the MuuriComponent represents the container in which the Items can be dropped." }
+            ]
+        }
+
+        this.addItem = this.addItem.bind(this);
+    }
+
+    addItem() {
+        var items_add = [{ "key": "key4", "value": "value1" }
+            , { "key": "key5", "value": "value2" }
+            , { "key": "key6", "value": "ble it and... that's it 🤯! The Items are the components that can be dragged, the MuuriComponent represents the container in which the Items can be dropped." }
+        ];
+
+        let items = this.state.items;
+        items = items.concat(items_add);
+        this.setState({ items });
     }
 
     render() {
-        const children = this.props.items ? this.props.items.map((props, index) => {
-            return <Item {...props} key={index} />
-        }) : [];
+        let children = [];
+        children = this.state.items.map(({ key, value }) => (
+            <Item value={value} key={key} />
+        ));
         return (
-            <div>
-                <MuuriComponent dragEnabled dragHandle=".drag">
-                    <Grid children={children} key="ch1" />
-                    <Grid children={children} key="ch2" />
-                    <Grid children={children} key="ch3" />
+            <section>
+                <MuuriComponent dragEnabled
+                    dragPlaceholder={{
+                        enabled: true,
+                        createElement: function (item) {
+                            return item.getElement().cloneNode(true);
+                        },
+                    }}>
+                    {/* <Grid children={children} key="ch1" /> */}
+                    {children}
                 </MuuriComponent>
-            </div>
+                <footer>
+                    <button onClick={this.addItem}> Add Item </button>
+                </footer>
+            </section>
         )
     }
 
@@ -26,7 +54,7 @@ class MuuriGrid extends React.Component {
 
 const Grid = ({ children }) => {
     return (
-        <div className="muuri-vertical">
+        <div className="muuri-vertical ">
             <div className="drag"> header </div>
             <MuuriComponent dragEnabled>
                 {children}
@@ -37,14 +65,14 @@ const Grid = ({ children }) => {
 
 }
 
-const Item = (props) => {
+const Item = ({ value }) => {
     return (
-        <div className="item">
-            <div className="item-header drag"> header</div>
-            <div className="item-content">
-                {props.value}
-            </div>
-            <div className="item-footer"></div>
+        <div className="muuri-item muuri-item-shown">
+            <header className="drag"> header</header>
+            <section className="item-content">
+                {value}
+            </section>
+            <footer></footer>
         </div>
     )
 }
