@@ -18,11 +18,10 @@ code {
 
 .muuri-item {
     position: relative;
-    width: 100px;
+    width: 200px;
     height: auto;
     margin: 10px;
     z-index: 1;
-    border: 1px solid;
 }
 
 .drag {
@@ -30,7 +29,8 @@ code {
 }
 
 .muuri-item-dragging {
-  border: 1px solid red;
+  background: lightgrey;
+  opacity: 0.5;
   z-index: 3;
 }
 .muuri-item-releasing {
@@ -41,7 +41,7 @@ code {
 } 
 .muuri-vertical {
     width: 100%;
-    height: 400px;
+    height: auto;
 }
 
 /* .item {

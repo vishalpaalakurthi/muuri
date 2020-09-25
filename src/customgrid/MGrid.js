@@ -1,85 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import { MuuriComponent, useDrag, useDraggable } from "muuri-react";
 
 export class MGrid extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      items: [
-        { key: "key1", value: "value1" },
-        { key: "key2", value: "value2" },
-        {
-          key: "key3",
-          value:
-            "ble it and... that's it 🤯! The Items are the components that can be dragged, the MuuriComponent represents the container in which the Items can be dropped."
-        }
-      ],
-      uuid: 3
-    };
+    constructor() {
+        super();
+        this.state = {
+            sections: [
+                { id: "id1", value: "value1" }
+            ]
+        };
 
-    this.addItem = this.addItem.bind(this);
-  }
-
-  addItem() {
-    let items_add = [];
-    for (let i = 0; i < 3; i++) {
-      let uuid = this.state.uuid;
-      uuid = uuid + 1;
-      this.setState({ uuid });
-      items_add.push({
-        key: "key" + uuid,
-        value: "value" + uuid
-      });
+        this.addSection = this.addSection.bind(this);
     }
-    debugger;
-    let items = this.state.items;
-    items = items.concat(items_add);
-    this.setState({ items });
-  }
 
-  render() {
-    let children = [];
-    children = this.state.items.map(({ key, value }) => (
-      <Item value={value} key={key} />
-    ));
-    return (
-      <div>
-        <MuuriComponent
-          dragEnabled
-          dragPlaceholder={{
-            enabled: true,
-            createElement: function (item) {
-              return item.getElement().cloneNode(true);
-            }
-          }}
-        >
-          {/* <Grid children={children} key="ch1" /> */}
-          {children}
-        </MuuriComponent>
-        <footer>
-          <button onClick={this.addItem}> Add Item </button>
-        </footer>
-      </div>
-    );
-  }
+    addSection() {
+        var sections = this.state.sections;
+        sections.push({ id: "id1", value: "value1" });
+        this.setState({sections});
+    }
+
+    render() {
+        let children = [];
+        children = this.state.sections.map(({index }) => (
+            <Grid key={index} addSection={this.addSection} />
+        ));
+        return (
+            <div>
+                <MuuriComponent
+                    dragEnabled
+                    dragHandle=".drag"
+                    dragPlaceholder={{
+                        enabled: true,
+                        createElement: function (item) {
+                            return item.getElement().cloneNode(true);
+                        }
+                    }}
+                >
+                    {children}
+                </MuuriComponent>
+                <footer>
+                </footer>
+            </div>
+        );
+    }
 }
 
-const Grid = ({ children }) => {
-  return (
-    <div className="muuri-vertical ">
-      <div className="drag"> header </div>
-      <MuuriComponent dragEnabled>{children}</MuuriComponent>
-      <div> Add New Section </div>
-    </div>
-  );
+const Grid = ({addSection}) => {
+
+    const [lastIndex, setLastIndex] = useState(0);
+    const [items, setItems] = useState(generateItems(lastIndex));
+    let children = [];
+    children = items.map(({ id, value, index }) => (
+        <Item value={value} id={id} key={index} />
+    ));
+
+    return (
+        <div className="muuri-vertical ">
+            <div className="drag"> header </div>
+            <MuuriComponent dragEnabled>
+                {children}
+            </MuuriComponent>
+            <footer>
+                <button onClick={() => {
+                    setLastIndex(lastIndex + 3);
+                    setItems(items.concat(generateItems(lastIndex)))
+                }}> Add Item </button>
+                <button onClick={addSection}> Add Section </button>
+            </footer>
+        </div>
+    );
 };
 
-const Item = ({ key, value }) => {
-  return (
-    <div>
-      <header className="drag"> header</header>
-      <section>{value}</section>
-      <footer></footer>
-    </div>
-  );
+const Item = ({ id, value }) => {
+    return (
+        <div>
+            <header className="drag"> header</header>
+            <section>{value}</section>
+            <footer></footer>
+        </div>
+    );
 };
+
+const generateItems = (lastIndex) => {
+    let items_add = [];
+    lastIndex = lastIndex + 1;
+    for (let i = 1; i <= 3; i++) {
+        items_add.push({
+            id: "id" + lastIndex,
+            value: "value" + lastIndex
+        });
+        lastIndex = lastIndex + 1;
+    }
+    return items_add;
+}
