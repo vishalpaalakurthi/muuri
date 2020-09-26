@@ -13,6 +13,9 @@ export const Grid = ({ children, isVerticalAlign }) => {
                 createElement: function (item) {
                     return item.getElement().cloneNode(true);
                 }
+            }}
+            onDragEnd={(item) => {
+                console.log(item.getGrid().getItems())
             }}>
             {children}
         </MuuriComponent>
